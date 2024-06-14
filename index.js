@@ -124,5 +124,3 @@ const myChart = new Chart(
             }
         );
         
-    }
-)
