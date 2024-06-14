@@ -49,88 +49,7 @@ let months = [
 
 let days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 
-fetch("http://localhost:3000/data").then((resp) =>
-{
-resp.text().then(async (value) =>
-    {
-        msgBuffer = value.split("\n");
-        
-        for (let i = 0; i < msgBuffer.length; i++) {
-            break;
-            counterA += 1;
-            if (counterA >= 10000) {
-                
-                console.log(counterA)
-                counterA = 0;
-            }
-
-            let dataJSON = JSON.parse(msgBuffer[i]);
-            let dataDate = new Date(dataJSON.timestamp);
-            let setDate = false;
-            let setUser = false;
-
-            await dataStore.forEach(async x=>{
-
-                if (x.year == dataDate.getFullYear() && x.month == dataDate.getMonth() && x.day == dataDate.getDate()) {
-
-
-                    await x.data.forEach(y => {
-
-                        if (y.author == dataJSON.author_id) {
-                            y.count += 1;
-                            setUser = true;
-                        }
-
-                    })
-
-                    if (setUser == false) {
-                        x.data.push({
-                            author: dataJSON.author_id,
-                            count: 1
-                        })
-                    }
-                    setDate = true;
-                }
-            })
-
-            if (setDate == false) {
-                dataStore.push({
-                    year: dataDate.getFullYear(),
-                    month: dataDate.getMonth(),
-                    day: dataDate.getDay(),
-                    data: []
-                })
-            }
-        }
-
-        // for (let i = 0; i < dataStore.length; i++) {
-            
-        //     for (let j = 0; j < dataStore[i].data.length; j++) {
-
-        //         let result = dataSets.find(x=>{
-        //             return x.author == dataStore[i].data[j].author;
-        //         })
-
-        //         if (result == undefined) {
-        //             dataSets.push({
-        //                 author: dataStore[i].data[j].author,
-        //                 data: [dataStore[i].data[j].count]
-        //             })
-        //         } else {
-        //             for (let x = 0; x < dataSets.length; x++) {
-        //                 if (dataSets[x].author == dataStore[i].data[j].author) {
-        //                     dataSets[x].data.push(dataStore[i].data[j].count)
-        //                 }
-        //             }
-        //         }
-
-        //     }
-
-        // }
-
-        console.log(dataStore);
-
-        const myChart = new Chart(
+const myChart = new Chart(
             CTX,
             {
 
@@ -206,4 +125,4 @@ resp.text().then(async (value) =>
         );
         
     }
-)})
+)
