@@ -2,7 +2,7 @@
 
 
 const CTX = document.getElementById("discstat").getContext("2d");
-CTX.canvas.width = windows.innerWidth;
+CTX.canvas.width = window.innerWidth;
 
 //viii
 const USERS = {
