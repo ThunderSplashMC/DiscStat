@@ -4,7 +4,7 @@
 const CTX = document.getElementById("discstat").getContext("2d");
 CTX.canvas.width = windows.innerWidth;
 
-
+//viii
 const USERS = {
     "382878314970349569": "ntsh_",
     "468791991933861918": "aorebirth",
